@@ -3,7 +3,7 @@
 选择文件路径的的插件，一般运用于设置缓存路径、选择文件等地方，代码简单，几个类，库没有导入其他的第三方包，干净整洁。
 
 #引入Gradle
-```
+
 allprojects {
 	repositories {
 		...
@@ -14,7 +14,7 @@ allprojects {
 dependencies {
      compile 'com.github.supertaohaili:FileChooser:1.0.0'
 }
-```
+
 
 #apk下载链接
 ```
