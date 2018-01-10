@@ -1,16 +1,26 @@
-apk 下载链接
-![](https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk)
+下载链接<a href="https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk">https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk</a></p>
 
 ## 效果
 ![](https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg)
 ![](https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg)
 ![](https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg)
 
+##
+##
+##
+##
 
 gradle引入
-dependencies {
-	        compile 'compile 'com.github.supertaohaili:FileChooser:1.0.0'
-	        }
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+
+		dependencies {
+    	        compile 'com.github.supertaohaili:FileChooser:1.0.0'
+    	}
 
 示例代码:
   FileChooser fileChooser = new FileChooser(MainActivity.this, new FileChooser.FileChoosenListener() {
