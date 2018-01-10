@@ -1,3 +1,11 @@
+apk 下载链接
+![](https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk)
+
+## 效果
+![](https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg)
+![](https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg)
+![](https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg)
+
 
 gradle引入
 dependencies {
