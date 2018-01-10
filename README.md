@@ -7,17 +7,14 @@
 
 # 效果图
 
-<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg" width="300"> <img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg" width="300">
-<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg" width="300">
+<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg" width="300"> <img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg" width="300"><img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg" width="300">
 
 
 
-#apk下载链接
-
+apk下载链接
 <a href="https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk">https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk</a></p>
 
-
-# 引入Gradle
+# 使用
 ```
 allprojects {
 	repositories {
@@ -31,8 +28,7 @@ dependencies {
 }
 ```
 
-
-#示例代码:
+示例代码:
 ``` java
   FileChooser fileChooser = new FileChooser(MainActivity.this, new FileChooser.FileChoosenListener() {
                             @Override
