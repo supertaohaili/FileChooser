@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.thl.filechooser.FileChooser;
+import com.thl.filechooser.FileInfo;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -97,8 +98,23 @@ public class MainActivity extends AppCompatActivity {
                                 ((TextView) findViewById(R.id.tv_msg)).setText(filePath);
                             }
                         });
-                        fileChooser.setChooseType(FileChooser.FOLDER);
-                        fileChooser.showFile(false);
+
+//                          FILE_TYPE_FOLDER="type_folder";  //文件夹
+//                          FILE_TYPE_VIDEO="type_video";    //视频
+//                          FILE_TYPE_AUDIO="type_audio";    //音频
+//                          FILE_TYPE_FILE="type_file";      //全部文件
+//                          FILE_TYPE_APK="type_apk";        //apk
+//                          FILE_TYPE_ZIP="type_zip";        //zip
+//                          FILE_TYPE_RAR="type_rar";        //rar
+//                          FILE_TYPE_JPEG="type_jpeg";      //jpeg
+//                          FILE_TYPE_JPG="type_jpg";         //jpg
+//                          FILE_TYPE_PNG="type_png";         //png
+//
+//                          FILE_TYPE_ALL="type_all";         //所有文件
+//                           FILE_TYPE_IMAGE="type_image";    //所有图片
+//                           FILE_TYPE_PACKAGE="type_package";  //压缩包
+
+                        fileChooser.setChooseType(FileInfo.FILE_TYPE_FILE);
                         fileChooser.open();
                     }
 
@@ -126,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         fileChooser.setCurrentPath(MainActivity.this.getExternalCacheDir().getAbsolutePath());
-
+                        fileChooser.showFile(false); //不显示文件
                         fileChooser.open();
                     }
 

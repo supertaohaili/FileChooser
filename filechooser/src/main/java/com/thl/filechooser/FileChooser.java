@@ -18,19 +18,16 @@ public class FileChooser {
     private int backIconRes = R.drawable.back_white;
     private boolean showFile = true;
 
-    public static int ALL = 0;  //所有可选
-    public static int FOLDER = 1;  //只可选文件夹
-    public static int FILE = 2;   //只可选文件
-    private int chooseType = ALL; //显示选择文件类型
 
-    public int getChooseType() {
+    private String chooseType = FileInfo.FILE_TYPE_ALL; //显示选择文件类型
+
+    public String getChooseType() {
         return chooseType;
     }
 
-    public void setChooseType(int chooseType) {
+    public void setChooseType(String chooseType) {
         this.chooseType = chooseType;
     }
-
 
     public boolean isFileShow() {
         return showFile;

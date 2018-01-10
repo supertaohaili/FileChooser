@@ -40,8 +40,24 @@ dependencies {
                         fileChooser.setTitle("选择文件路径");
                         fileChooser.setDoneText("确定");
                         fileChooser.setThemeColor(R.color.colorAccent);
-                        fileChooser.setChooseType(FileChooser.FOLDER);
-                        fileChooser.showFile(false);
+
+   //                          FILE_TYPE_FOLDER="type_folder";  //文件夹
+   //                          FILE_TYPE_VIDEO="type_video";    //视频
+   //                          FILE_TYPE_AUDIO="type_audio";    //音频
+   //                          FILE_TYPE_FILE="type_file";      //全部文件
+   //                          FILE_TYPE_APK="type_apk";        //apk
+   //                          FILE_TYPE_ZIP="type_zip";        //zip
+   //                          FILE_TYPE_RAR="type_rar";        //rar
+   //                          FILE_TYPE_JPEG="type_jpeg";      //jpeg
+   //                          FILE_TYPE_JPG="type_jpg";         //jpg
+   //                          FILE_TYPE_PNG="type_png";         //png
+   //
+   //                          FILE_TYPE_ALL="type_all";         //所有文件
+   //                           FILE_TYPE_IMAGE="type_image";    //所有图片
+   //                           FILE_TYPE_PACKAGE="type_package";  //压缩包
+
+                        fileChooser.setChooseType(FileInfo.FILE_TYPE_FILE);
+                        fileChooser.showFile(false);  //是否显示文件
                         fileChooser.open();
 ```
 

@@ -60,7 +60,7 @@ public class FileChooserActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         String doneText = getIntent().getStringExtra("doneText");
         int backIconRes = getIntent().getIntExtra("backIconRes", R.drawable.back_white);
-        int chooseType = getIntent().getIntExtra("chooseType", 0);
+        String chooseType = getIntent().getStringExtra("chooseType");
         int themeColorRes = getIntent().getIntExtra("themeColorRes", R.color.themeColor);
 
         tourController = new FileTourController(this, mChoosenFilePath);

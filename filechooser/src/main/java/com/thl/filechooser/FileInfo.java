@@ -16,6 +16,12 @@ public class FileInfo {
     public static final String FILE_TYPE_JPG="type_jpg";
     public static final String FILE_TYPE_PNG="type_png";
 
+    public static final String FILE_TYPE_ALL="type_all";
+    public static final String  FILE_TYPE_IMAGE="type_image";
+    public static final String  FILE_TYPE_PACKAGE="type_package";
+
+
+
     private String fileType = FILE_TYPE_FOLDER;
     private boolean isFolder;
     private String fileName;

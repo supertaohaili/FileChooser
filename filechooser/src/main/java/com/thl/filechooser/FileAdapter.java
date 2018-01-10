@@ -14,9 +14,9 @@ import static com.thl.filechooser.FileChooser.*;
 public class FileAdapter extends CommonAdapter<FileInfo> {
 
     private int sign = -1;
-    private int chooseType = 0;
+    private String chooseType;
 
-    public FileAdapter(Context context, ArrayList<FileInfo> dataList, int resId, int chooseType) {
+    public FileAdapter(Context context, ArrayList<FileInfo> dataList, int resId, String chooseType) {
         super(context, dataList, resId);
         this.chooseType = chooseType;
     }
@@ -47,6 +47,8 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
         } else {
             imageView.setImageResource(R.drawable.format_other);
         }
+
+
         if (position != dataList.size() - 1) {
             divider.setVisibility(View.VISIBLE);
         } else {
@@ -59,28 +61,43 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
         } else {
             fileChoose.setImageResource(R.drawable.log_choose_checkbox_off);
         }
-        boolean folder = data.isFolder();
-        switch (chooseType) {
-            case 0:
+
+        if (chooseType.equals(FileInfo.FILE_TYPE_ALL)) {
+            fileChoose.setVisibility(View.VISIBLE);
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_FOLDER)) {
+            boolean folder = data.isFolder();
+            if (folder) {
                 fileChoose.setVisibility(View.VISIBLE);
-                break;
-            case 1:
-                if (folder) {
-                    fileChoose.setVisibility(View.VISIBLE);
-                } else {
-                    fileChoose.setVisibility(View.GONE);
-                }
-                break;
-            case 2:
-                if (!folder) {
-                    fileChoose.setVisibility(View.VISIBLE);
-                } else {
-                    fileChoose.setVisibility(View.GONE);
-                }
-                break;
-            default:
+            } else {
+                fileChoose.setVisibility(View.GONE);
+            }
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_FILE)) {
+            boolean folder = data.isFolder();
+            if (!folder) {
                 fileChoose.setVisibility(View.VISIBLE);
-                break;
+            } else {
+                fileChoose.setVisibility(View.GONE);
+            }
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_IMAGE)) {
+            if (FileInfo.FILE_TYPE_JPEG.equals(data.getFileType())
+                    || FileInfo.FILE_TYPE_JPG.equals(data.getFileType())
+                    || FileInfo.FILE_TYPE_PNG.equals(data.getFileType())) {
+                fileChoose.setVisibility(View.VISIBLE);
+            } else {
+                fileChoose.setVisibility(View.GONE);
+            }
+        }else if (chooseType.equals(FileInfo.FILE_TYPE_PACKAGE)) {
+            if (FileInfo.FILE_TYPE_ZIP.equals(data.getFileType()) || FileInfo.FILE_TYPE_RAR.equals(data.getFileType())) {
+                fileChoose.setVisibility(View.VISIBLE);
+            } else {
+                fileChoose.setVisibility(View.GONE);
+            }
+        } else {
+            if (chooseType.equals(data.getFileType())) {
+                fileChoose.setVisibility(View.VISIBLE);
+            } else {
+                fileChoose.setVisibility(View.GONE);
+            }
         }
 
         fileChoose.setOnClickListener(new View.OnClickListener() {
