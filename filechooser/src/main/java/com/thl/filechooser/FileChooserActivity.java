@@ -1,0 +1,239 @@
+package com.thl.filechooser;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class FileChooserActivity extends AppCompatActivity {
+
+    private boolean showFile = true;
+    public static FileChooser mFileChooser;
+    private String mChoosenFilePath;
+
+    private FileTourController tourController;
+    private FileAdapter adapter;
+    private CurrentFileAdapter currentFileAdapter;
+
+
+    private RecyclerView fileRv;
+    private int firstItemPosition = 0;
+    private int lastItemPosition = 0;
+    private HashMap<Integer, Integer> firstItemPositionMap;
+    private HashMap<Integer, Integer> lastItemPositionMap;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_file_chooser);
+        initListener();
+    }
+
+    private void initListener() {
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        findViewById(R.id.rightText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickRightText();
+            }
+        });
+
+        this.showFile = getIntent().getBooleanExtra("showFile", true);
+        this.mChoosenFilePath = getIntent().getStringExtra("currentPath");
+        String title = getIntent().getStringExtra("title");
+        String doneText = getIntent().getStringExtra("doneText");
+        int backIconRes = getIntent().getIntExtra("backIconRes", R.drawable.back_white);
+        int chooseType = getIntent().getIntExtra("chooseType", 0);
+        int themeColorRes = getIntent().getIntExtra("themeColorRes", R.color.themeColor);
+
+        tourController = new FileTourController(this, mChoosenFilePath);
+        tourController.setShowFile(this.showFile);
+
+        ImageView back = (ImageView) findViewById(R.id.back);
+        TextView tvTitle = (TextView) findViewById(R.id.title);
+        TextView tvRightText = (TextView) findViewById(R.id.rightText);
+        View bgView = (View) findViewById(R.id.bg_title);
+
+        back.setImageResource(backIconRes);
+        tvTitle.setText(title);
+        tvRightText.setText(doneText);
+        bgView.setBackgroundResource(themeColorRes);
+
+        adapter = new FileAdapter(this, (ArrayList<FileInfo>) tourController.getCurrenFileInfoList(), R.layout.item_file,chooseType);
+        fileRv = (RecyclerView) findViewById(R.id.fileRv);
+        fileRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        fileRv.setAdapter(adapter);
+
+        final RecyclerView currentPath = (RecyclerView) findViewById(R.id.currentPath);
+        currentFileAdapter = new CurrentFileAdapter(this, (ArrayList<File>) tourController.getCurrentFolderList(), R.layout.item_current_file);
+        currentPath.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        currentPath.setAdapter(currentFileAdapter);
+        currentPath.scrollToPosition(tourController.getCurrentFolderList().size() - 1);
+        firstItemPositionMap = new HashMap<>();
+        lastItemPositionMap = new HashMap<>();
+
+        fileRv.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (recyclerView.getLayoutManager() != null && layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+                    firstItemPosition = linearManager.findFirstVisibleItemPosition();
+                    lastItemPosition = linearManager.findLastVisibleItemPosition();
+                    Log.e("taohaili", "改变filePosition:" + firstItemPosition);
+                    Log.e("taohaili", "改变lastItemPosition:" + lastItemPosition);
+                }
+            }
+        });
+        adapter.setItemClickListener(new CommonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                File selectFile = new File(tourController.getCurrenFileInfoList().get(position).getFilePath());
+                if (selectFile.isDirectory()) {
+                    ArrayList<FileInfo> childFileInfoList = (ArrayList<FileInfo>) tourController.addCurrentFile(selectFile);
+                    adapter.setData(childFileInfoList);
+                    adapter.notifyData();
+
+                    currentFileAdapter.setData(tourController.getCurrentFolderList());
+                    currentFileAdapter.notifyDataSetChanged();
+                    int sign = tourController.getCurrentFolderList().size() - 1;
+                    currentPath.scrollToPosition(sign);
+                    firstItemPositionMap.put(sign, firstItemPosition);
+                    lastItemPositionMap.put(sign, lastItemPosition);
+
+                    Log.e("taohaili", "进入filePosition:" + firstItemPosition);
+                    Log.e("taohaili", "进入lastItemPosition:" + lastItemPosition);
+                    Log.e("taohaili", "进入sign:" + sign);
+                } else {
+                    adapter.notifyData(position);
+                }
+            }
+        });
+
+        currentFileAdapter.setItemClickListener(new CommonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                List<FileInfo> fileInfoList = tourController.resetCurrentFile(position);
+                adapter.setData(fileInfoList);
+                adapter.notifyData();
+
+                currentFileAdapter.setData(tourController.getCurrentFolderList());
+                currentFileAdapter.notifyDataSetChanged();
+
+                currentPath.scrollToPosition(tourController.getCurrentFolderList().size() - 1);
+            }
+        });
+
+        findViewById(R.id.switchSdcard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ListPopupWindow listPopupWindow = new ListPopupWindow(FileChooserActivity.this);
+                listPopupWindow.setAnchorView(v);
+                ArrayList<String> sdcardList = new ArrayList<>();
+                sdcardList.add("手机存储");
+                if (FileTourController.getStoragePath(FileChooserActivity.this, true) != null)
+                    sdcardList.add("SD卡");
+
+                SdCardAdapter sdCardAdapter = new SdCardAdapter(FileChooserActivity.this, sdcardList);
+                listPopupWindow.setAdapter(sdCardAdapter);
+                listPopupWindow.setWidth(sdCardAdapter.getItemViewWidth());
+                listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        firstItemPositionMap.clear();
+                        lastItemPositionMap.clear();
+                        firstItemPosition = 0;
+                        lastItemPosition = 0;
+                        if (tourController != null)
+                            tourController.switchSdCard(position);
+                        if (adapter != null) {
+                            adapter.setData(tourController.getCurrenFileInfoList());
+                            adapter.notifyDataSetChanged();
+                        }
+                        if (currentFileAdapter != null) {
+                            currentFileAdapter.setData(tourController.getCurrentFolderList());
+                            currentFileAdapter.notifyDataSetChanged();
+                        }
+                        listPopupWindow.dismiss();
+                    }
+                });
+                listPopupWindow.show();
+
+            }
+        });
+    }
+
+    public void clickRightText() {
+        if (adapter != null && adapter.getSign() < 0) {
+            Toast.makeText(this, "请选择文件路径", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (tourController != null) {
+            mChoosenFilePath = tourController.getCurrentFile().getAbsolutePath();
+        }
+        if (this.mFileChooser != null) {
+            mFileChooser.finish(adapter.getChooseFilePath());
+        }
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFileChooser = null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!tourController.isRootFile()) {
+            List<FileInfo> currentList = tourController.backToParent();
+            adapter.setData(currentList);
+            adapter.notifyDataSetChanged();
+            currentFileAdapter.setData(tourController.getCurrentFolderList());
+            currentFileAdapter.notifyDataSetChanged();
+
+            int sign = tourController.getCurrentFolderList().size();
+            Log.e("taohaili", "返回sign:" + sign);
+
+            Integer firstposition = firstItemPositionMap.get(sign);
+            int first = firstposition == null ? 0 : firstposition.intValue();
+            Log.e("taohaili", "返回firstItemPosition:" + first);
+
+            Integer lastItemPosition = lastItemPositionMap.get(sign);
+            int last = lastItemPosition == null ? 0 : lastItemPosition.intValue();
+            Log.e("taohaili", "返回lastItemPosition:" + last);
+
+            int rectification = dp2px(15); //纠偏
+            if (fileRv.getLayoutManager() != null) {
+                ((LinearLayoutManager) fileRv.getLayoutManager()).scrollToPositionWithOffset(first, last);
+            }
+
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public int dp2px(float dpValue) {
+        final float scale = this.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+}

@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- ActionSheet进出动画 -->
+
+    <!-- Base application theme. -->
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+
+</resources>
