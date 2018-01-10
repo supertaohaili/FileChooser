@@ -23,7 +23,7 @@ allprojects {
 }
 
 dependencies {
-     compile 'com.github.supertaohaili:FileChooser:1.0.0'
+    compile 'com.github.supertaohaili:FileChooser:1.0.1'
 }
 ```
 
