@@ -2,6 +2,22 @@
 
 选择文件路径的的插件，一般运用于设置缓存路径、选择文件等地方，代码简单，几个类，库没有导入其他的第三方包，干净整洁。
 
+
+
+# 效果图
+```
+<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg" width="300">
+<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg" width="300">
+<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg" width="300">
+```
+
+
+#apk下载链接
+```
+<a href="https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk">https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk</a></p>
+```
+
+
 # 引入Gradle
 ```
 allprojects {
@@ -16,15 +32,6 @@ dependencies {
 }
 ```
 
-
-<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg" width="300">
-<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg" width="300">
-<img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg" width="300">
-
-
-#apk下载链接
-
-<a href="https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk">https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk</a></p>
 
 #示例代码:
 ``` java
