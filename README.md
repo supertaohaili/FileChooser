@@ -19,7 +19,6 @@ dependencies {
 #apk下载链接
 ```
 <a href="https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk">https://github.com/supertaohaili/FileChooser/blob/master/app-debug.apk</a></p>
-# Or Using Gradle
 ```
 
 #效果图
@@ -27,7 +26,6 @@ dependencies {
 <img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113111.jpg" width="300">
 <img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113122.jpg" width="300">
 <img src="https://github.com/supertaohaili/FileChooser/blob/master/S80110-113143.jpg" width="300">
-# Or Using Gradle
 ```
 
 #示例代码:
