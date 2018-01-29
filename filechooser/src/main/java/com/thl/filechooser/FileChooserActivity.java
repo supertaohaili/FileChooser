@@ -99,8 +99,6 @@ public class FileChooserActivity extends AppCompatActivity {
                     LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
                     firstItemPosition = linearManager.findFirstVisibleItemPosition();
                     lastItemPosition = linearManager.findLastVisibleItemPosition();
-                    Log.e("taohaili", "改变filePosition:" + firstItemPosition);
-                    Log.e("taohaili", "改变lastItemPosition:" + lastItemPosition);
                 }
             }
         });
@@ -120,9 +118,6 @@ public class FileChooserActivity extends AppCompatActivity {
                     firstItemPositionMap.put(sign, firstItemPosition);
                     lastItemPositionMap.put(sign, lastItemPosition);
 
-                    Log.e("taohaili", "进入filePosition:" + firstItemPosition);
-                    Log.e("taohaili", "进入lastItemPosition:" + lastItemPosition);
-                    Log.e("taohaili", "进入sign:" + sign);
                 } else {
                     adapter.notifyData(position);
                 }
