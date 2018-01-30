@@ -3,10 +3,4 @@
     package="com.thl.filechooser">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <application
-        android:allowBackup="true"
-        android:theme="@style/NoActionBar">
-        <activity android:name="com.thl.filechooser.FileChooserActivity">
-        </activity>
-    </application>
 </manifest>
