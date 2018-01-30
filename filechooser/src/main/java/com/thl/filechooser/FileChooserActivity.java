@@ -20,6 +20,7 @@ import java.util.List;
 public class FileChooserActivity extends AppCompatActivity {
 
     private boolean showFile = true;
+    private boolean showHideFile = true;
     public static FileChooser mFileChooser;
     private String mChoosenFilePath;
 
@@ -56,27 +57,31 @@ public class FileChooserActivity extends AppCompatActivity {
         });
 
         this.showFile = getIntent().getBooleanExtra("showFile", true);
+        this.showHideFile = getIntent().getBooleanExtra("showHideFile", true);
         this.mChoosenFilePath = getIntent().getStringExtra("currentPath");
         String title = getIntent().getStringExtra("title");
         String doneText = getIntent().getStringExtra("doneText");
-        int backIconRes = getIntent().getIntExtra("backIconRes", R.drawable.back_white);
+        int backIconRes = getIntent().getIntExtra("backIconRes", -1);
         String chooseType = getIntent().getStringExtra("chooseType");
-        int themeColorRes = getIntent().getIntExtra("themeColorRes", R.color.themeColor);
+        int themeColorRes = getIntent().getIntExtra("themeColorRes", -1);
 
         tourController = new FileTourController(this, mChoosenFilePath);
         tourController.setShowFile(this.showFile);
-
+        tourController.setShowHideFile(this.showHideFile);
         ImageView back = (ImageView) findViewById(R.id.back);
         TextView tvTitle = (TextView) findViewById(R.id.title);
         TextView tvRightText = (TextView) findViewById(R.id.rightText);
         View bgView = (View) findViewById(R.id.bg_title);
-
-        back.setImageResource(backIconRes);
+        if (backIconRes != -1) {
+            back.setImageResource(backIconRes);
+        }
         tvTitle.setText(title);
         tvRightText.setText(doneText);
-        bgView.setBackgroundResource(themeColorRes);
+        if (themeColorRes != -1) {
+            bgView.setBackgroundResource(themeColorRes);
+        }
 
-        adapter = new FileAdapter(this, (ArrayList<FileInfo>) tourController.getCurrenFileInfoList(), R.layout.item_file,chooseType);
+        adapter = new FileAdapter(this, (ArrayList<FileInfo>) tourController.getCurrenFileInfoList(), R.layout.item_file, chooseType);
         fileRv = (RecyclerView) findViewById(R.id.fileRv);
         fileRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         fileRv.setAdapter(adapter);

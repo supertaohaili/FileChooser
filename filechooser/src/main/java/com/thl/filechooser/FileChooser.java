@@ -17,7 +17,16 @@ public class FileChooser {
     private String doneText = "完成";
     private int backIconRes = R.drawable.back_white;
     private boolean showFile = true;
+    private boolean showHideFile = false;
 
+    public boolean isShowHideFile() {
+        return showHideFile;
+    }
+
+    public FileChooser setShowHideFile(boolean showHideFile) {
+        this.showHideFile = showHideFile;
+        return this;
+    }
 
     private String chooseType = FileInfo.FILE_TYPE_ALL; //显示选择文件类型
 
@@ -72,6 +81,7 @@ public class FileChooser {
         FileChooserActivity.mFileChooser = this;
         Intent intent = new Intent(mContext, FileChooserActivity.class);
         intent.putExtra("themeColorRes", this.themeColorRes);
+        intent.putExtra("showHideFile", this.showHideFile);
         intent.putExtra("currentPath", this.mChoosenFilePath);
         intent.putExtra("title", this.title);
         intent.putExtra("doneText", this.doneText);

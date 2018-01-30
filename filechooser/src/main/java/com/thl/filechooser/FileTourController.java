@@ -2,6 +2,7 @@ package com.thl.filechooser;
 
 import android.content.Context;
 import android.os.storage.StorageManager;
+import android.util.Log;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -20,7 +21,9 @@ public class FileTourController {
     private List<File> currentFolderList = new ArrayList<>();
     private boolean isRootFile = true;
     private boolean showFile = true;
+    private boolean showHideFile = false;
     private int sdcardIndex;
+
 
     private Context mContext;
 
@@ -67,6 +70,14 @@ public class FileTourController {
 
     public void setShowFile(boolean showFile) {
         this.showFile = showFile;
+    }
+
+    public boolean isShowHideFile() {
+        return showHideFile;
+    }
+
+    public void setShowHideFile(boolean showHideFile) {
+        this.showHideFile = showHideFile;
     }
 
     public List<File> getCurrentFolderList() {
@@ -186,7 +197,11 @@ public class FileTourController {
             for (int i = 0; i < childFiles.length; i++) {
                 FileInfo fileInfo = new FileInfo();
                 File childFile = childFiles[i];
-                fileInfo.setFileName(childFile.getName());
+                String name = childFile.getName();
+                if (name.length()>0&& String.valueOf(name.charAt(0)).equals(".")&&!showHideFile){
+                    continue;
+                }
+                fileInfo.setFileName(name);
                 String time = new SimpleDateFormat("yyyy年MM月dd日").format(new Date(childFile.lastModified()));
                 fileInfo.setCreateTime(time);
                 fileInfo.setFilePath(childFile.getAbsolutePath());
