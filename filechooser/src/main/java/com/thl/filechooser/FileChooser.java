@@ -11,11 +11,11 @@ public class FileChooser {
     private Context mContext;
     private FileChoosenListener fileChoosenListener;
 
-    private int themeColorRes = R.color.themeColor;
+    private int themeColorRes = -1;
     private String mChoosenFilePath = "";
     private String title = "选择文件";
     private String doneText = "完成";
-    private int backIconRes = R.drawable.back_white;
+    private int backIconRes = -1;
     private boolean showFile = true;
     private boolean showHideFile = false;
 
