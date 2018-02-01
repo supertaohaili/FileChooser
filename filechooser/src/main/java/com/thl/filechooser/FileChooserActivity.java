@@ -124,7 +124,6 @@ public class FileChooserActivity extends AppCompatActivity {
                     lastItemPositionMap.put(sign, lastItemPosition);
 
                 } else {
-                    adapter.notifyData(position);
                 }
             }
         });
@@ -212,15 +211,11 @@ public class FileChooserActivity extends AppCompatActivity {
             currentFileAdapter.notifyDataSetChanged();
 
             int sign = tourController.getCurrentFolderList().size();
-            Log.e("taohaili", "返回sign:" + sign);
-
             Integer firstposition = firstItemPositionMap.get(sign);
             int first = firstposition == null ? 0 : firstposition.intValue();
-            Log.e("taohaili", "返回firstItemPosition:" + first);
 
             Integer lastItemPosition = lastItemPositionMap.get(sign);
             int last = lastItemPosition == null ? 0 : lastItemPosition.intValue();
-            Log.e("taohaili", "返回lastItemPosition:" + last);
 
             int rectification = dp2px(15); //纠偏
             if (fileRv.getLayoutManager() != null) {

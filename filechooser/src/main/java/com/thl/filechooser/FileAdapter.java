@@ -2,9 +2,11 @@ package com.thl.filechooser;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,14 +17,16 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
 
     private int sign = -1;
     private String chooseType;
+    private ArrayList<FileInfo> dataList;
 
     public FileAdapter(Context context, ArrayList<FileInfo> dataList, int resId, String chooseType) {
         super(context, dataList, resId);
         this.chooseType = chooseType;
+        this.dataList = dataList;
     }
 
     @Override
-    public void bindView(RecyclerView.ViewHolder holder, FileInfo data, final int position) {
+    public void bindView(RecyclerView.ViewHolder holder, final FileInfo data, final int position) {
         TextView textView = (TextView) holder.itemView.findViewById(R.id.fileName);
         TextView textTime = (TextView) holder.itemView.findViewById(R.id.fileTime);
         textView.setText(data.getFileName());
@@ -62,50 +66,107 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
             fileChoose.setImageResource(R.drawable.log_choose_checkbox_off);
         }
 
+
         if (chooseType.equals(FileInfo.FILE_TYPE_ALL)) {
             fileChoose.setVisibility(View.VISIBLE);
+            fileChoose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    notifyData(position);
+                }
+            });
         } else if (chooseType.equals(FileInfo.FILE_TYPE_FOLDER)) {
             boolean folder = data.isFolder();
             if (folder) {
                 fileChoose.setVisibility(View.VISIBLE);
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notifyData(position);
+                    }
+                });
             } else {
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 fileChoose.setVisibility(View.GONE);
             }
         } else if (chooseType.equals(FileInfo.FILE_TYPE_FILE)) {
             boolean folder = data.isFolder();
             if (!folder) {
                 fileChoose.setVisibility(View.VISIBLE);
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notifyData(position);
+                    }
+                });
             } else {
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 fileChoose.setVisibility(View.GONE);
             }
         } else if (chooseType.equals(FileInfo.FILE_TYPE_IMAGE)) {
+
             if (FileInfo.FILE_TYPE_JPEG.equals(data.getFileType())
                     || FileInfo.FILE_TYPE_JPG.equals(data.getFileType())
                     || FileInfo.FILE_TYPE_PNG.equals(data.getFileType())) {
                 fileChoose.setVisibility(View.VISIBLE);
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notifyData(position);
+                    }
+                });
             } else {
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 fileChoose.setVisibility(View.GONE);
             }
-        }else if (chooseType.equals(FileInfo.FILE_TYPE_PACKAGE)) {
+
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_PACKAGE)) {
             if (FileInfo.FILE_TYPE_ZIP.equals(data.getFileType()) || FileInfo.FILE_TYPE_RAR.equals(data.getFileType())) {
                 fileChoose.setVisibility(View.VISIBLE);
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notifyData(position);
+                    }
+                });
             } else {
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 fileChoose.setVisibility(View.GONE);
             }
         } else {
             if (chooseType.equals(data.getFileType())) {
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notifyData(position);
+                    }
+                });
                 fileChoose.setVisibility(View.VISIBLE);
             } else {
+                fileChoose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 fileChoose.setVisibility(View.GONE);
             }
         }
-
-        fileChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                notifyData(position);
-            }
-        });
     }
 
     public int getSign() {

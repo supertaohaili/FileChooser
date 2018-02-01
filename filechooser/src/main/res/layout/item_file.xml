@@ -22,12 +22,11 @@
 
         <ImageView
             android:id="@+id/fileChoose"
-            android:layout_width="40dp"
+            android:layout_width="55dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="4dp"
-            android:padding="10dp"
+            android:padding="9dp"
             android:src="@drawable/log_choose_checkbox_off" />
 
         <LinearLayout
