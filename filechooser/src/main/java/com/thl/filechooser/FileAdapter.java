@@ -66,6 +66,15 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
             fileChoose.setImageResource(R.drawable.log_choose_checkbox_off);
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener!=null){
+                    mItemClickListener.onItemClick(v,position,data);
+                }
+            }
+        });
+
 
         if (chooseType.equals(FileInfo.FILE_TYPE_ALL)) {
             fileChoose.setVisibility(View.VISIBLE);
@@ -166,6 +175,46 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
                 });
                 fileChoose.setVisibility(View.GONE);
             }
+        }
+    }
+
+    private ItemClickListener mItemClickListener;
+
+    public void setItemClickListener(ItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+    public interface ItemClickListener{
+        void onItemClick(View view, int position,FileInfo data);
+    }
+
+    public void notifyClick(FileInfo data, int position) {
+        Log.e("taohaili",chooseType);
+        Log.e("taohaili",data.getFileType());
+        if (chooseType.equals(FileInfo.FILE_TYPE_ALL)) {
+            notifyData(position);
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_FOLDER)) {
+            boolean folder = data.isFolder();
+            if (folder) {
+                notifyData(position);
+            }
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_FILE)) {
+            boolean folder = data.isFolder();
+            if (!folder) {
+                notifyData(position);
+            }
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_IMAGE)) {
+            if (FileInfo.FILE_TYPE_JPEG.equals(data.getFileType())
+                    || FileInfo.FILE_TYPE_JPG.equals(data.getFileType())
+                    || FileInfo.FILE_TYPE_PNG.equals(data.getFileType())) {
+                notifyData(position);
+            }
+        } else if (chooseType.equals(FileInfo.FILE_TYPE_PACKAGE)) {
+            if (FileInfo.FILE_TYPE_ZIP.equals(data.getFileType()) || FileInfo.FILE_TYPE_RAR.equals(data.getFileType())) {
+                notifyData(position);
+            }
+        } else if (chooseType.equals(data.getFileType())) {
+            notifyData(position);
         }
     }
 

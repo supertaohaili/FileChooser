@@ -32,14 +32,14 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         bindView(holder, dataList.get(position), position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemClickListener != null)
+        if (itemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     itemClickListener.onItemClick(holder.itemView, position);
-
-            }
-        });
+                }
+            });
+        }
     }
 
     public abstract void bindView(RecyclerView.ViewHolder holder, T data, int position);

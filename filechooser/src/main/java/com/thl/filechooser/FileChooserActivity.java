@@ -107,9 +107,9 @@ public class FileChooserActivity extends AppCompatActivity {
                 }
             }
         });
-        adapter.setItemClickListener(new CommonAdapter.OnItemClickListener() {
+        adapter.setItemClickListener(new FileAdapter.ItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position, FileInfo data) {
                 File selectFile = new File(tourController.getCurrenFileInfoList().get(position).getFilePath());
                 if (selectFile.isDirectory()) {
                     ArrayList<FileInfo> childFileInfoList = (ArrayList<FileInfo>) tourController.addCurrentFile(selectFile);
@@ -124,6 +124,7 @@ public class FileChooserActivity extends AppCompatActivity {
                     lastItemPositionMap.put(sign, lastItemPosition);
 
                 } else {
+                    adapter.notifyClick(data,position);
                 }
             }
         });
