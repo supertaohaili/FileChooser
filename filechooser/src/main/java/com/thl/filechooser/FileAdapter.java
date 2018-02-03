@@ -17,12 +17,10 @@ public class FileAdapter extends CommonAdapter<FileInfo> {
 
     private int sign = -1;
     private String chooseType;
-    private ArrayList<FileInfo> dataList;
 
     public FileAdapter(Context context, ArrayList<FileInfo> dataList, int resId, String chooseType) {
         super(context, dataList, resId);
         this.chooseType = chooseType;
-        this.dataList = dataList;
     }
 
     @Override
