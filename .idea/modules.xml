@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FileChooser.iml" filepath="$PROJECT_DIR$/FileChooser.iml" />
       <module fileurl="file://E:\android_wrok\FileChooser\.idea\FileChooser.iml" filepath="E:\android_wrok\FileChooser\.idea\FileChooser.iml" />
+      <module fileurl="file://E:\mywork\FileChooser\FileChooser.iml" filepath="E:\mywork\FileChooser\FileChooser.iml" />
       <module fileurl="file://E:\mywork\FileChooser\FileChooserDemo.iml" filepath="E:\mywork\FileChooser\FileChooserDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/filechooser/filechooser.iml" filepath="$PROJECT_DIR$/filechooser/filechooser.iml" />
