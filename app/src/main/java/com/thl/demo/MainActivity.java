@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 //                           FILE_TYPE_IMAGE="type_image";    //所有图片
 //                           FILE_TYPE_PACKAGE="type_package";  //压缩包
 
-                        fileChooser.setChooseType(FileInfo.FILE_TYPE_IMAGE);
+                        fileChooser.setChooseType(FileInfo.FILE_TYPE_VIDEO);
                         fileChooser.open();
                     }
 

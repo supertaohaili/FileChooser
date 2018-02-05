@@ -211,10 +211,35 @@ public class FileTourController {
                 } else {
                     fileInfo.setFolder(false);
                     if ("mp4".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "3gp".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "wmv".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "ts".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "rmvb".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "mov".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "m4v".equals(getFileTypeName(childFile.getAbsolutePath())) ||
                             "mkv".equals(getFileTypeName(childFile.getAbsolutePath())) ||
                             "avi".equals(getFileTypeName(childFile.getAbsolutePath())) ||
-                            "3gp".equals(getFileTypeName(childFile.getAbsolutePath())) ||
-                            "mov".equals(getFileTypeName(childFile.getAbsolutePath())))
+                            "3gpp".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "3gpp2".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "flv".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "divx".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "f4v".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "rm".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "asf".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "ram".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "mpg".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "mpeg".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "dat".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "webm".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "qsv".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "v8".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "swf".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "m2v".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "asx".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "ra".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "ndivx".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "xvid".equals(getFileTypeName(childFile.getAbsolutePath())) ||
+                            "m3u8".equals(getFileTypeName(childFile.getAbsolutePath())))
                         fileInfo.setFileType(FileInfo.FILE_TYPE_VIDEO);
                     else if ("mp3".equals(getFileTypeName(childFile.getAbsolutePath())) ||
                             "aac".equals(getFileTypeName(childFile.getAbsolutePath())) ||
